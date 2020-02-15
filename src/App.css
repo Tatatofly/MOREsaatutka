@@ -1,0 +1,11 @@
+.header {
+  font-size: 23pt;
+  background-color: #ffffff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.content {
+  margin: auto;
+}
