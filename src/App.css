@@ -4,8 +4,23 @@
   padding-top: 15px;
   padding-bottom: 15px;
   text-align: center;
+  border-style: solid!important;
+  border: 1px;
+  border-color: #E6E6E6;
 }
 
 .content {
-  margin: auto;
+  padding-top: 10px!important;
+  padding-bottom: 10px!important;
+  margin-top: 0px!important;
+  margin-bottom: 15px!important;
+  background-color: #ffffff;
+  border-style: solid!important;
+  border: 1px;
+  border-color: #E6E6E6;
+}
+
+.dropDown {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }

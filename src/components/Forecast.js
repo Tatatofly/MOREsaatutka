@@ -5,12 +5,12 @@ class Forecast extends React.Component {
     render() {
       const { forecast } = this.props;
       if(forecast) {
-        let snow = ""
+        let snow = "0"
         if(forecast.snow) {
           snow = forecast.snow["3h"];
-        } else {
+        } else if(forecast.rain) {
           snow = forecast.rain["3h"];
-        }
+        } // TODO: Käpistellään data ja parannellaan
         return (
           <div className="singleForecast">
             {forecast.dt_txt}<br />

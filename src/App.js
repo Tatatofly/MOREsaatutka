@@ -1,5 +1,9 @@
 import React from 'react';
 import './App.css';
+
+import Container from 'react-bootstrap/Container';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
 import cities from './config/cities.json';
 import getWeather from './services/getWeather'
 import Forecasts from './components/Forecasts'
@@ -10,8 +14,11 @@ class App extends React.Component {
   state = {
     isLoading : false,
     isReady : false,
+    cityFilter : 0,
     current : []
   }
+
+  // TODO: Logiikka kaupunkien vaihdoille
 
   componentDidMount() {
     this.setState({isLoading: true});
@@ -22,13 +29,24 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.current)
+    console.log(this.state)
     return (
       <div className="App">
         <div className="header">Säätutka</div>
-        <div className="content">{Object.entries(cities).map(function(city) {return city[1]})}</div>
-        <div><CurrentWeather weather={this.state.current[0]} /></div>
-        <div><Forecasts id="634964" /></div>
+        <Container>
+          <div className="dropDown">
+            <select className="custom-select" value={this.state.cityFilter} onChange={(e) => this.setState({cityFilter: e.target.value})}>>
+              <option value="0">Kaikki kaupungit</option>
+              {Object.entries(cities).map((city) => <option key={city[0]} value={city[0]}>{city[1]}</option>)}
+            </select>
+          </div>
+          <Jumbotron className="content">
+            <CurrentWeather weather={this.state.current[2] /* STAATTINEN VIELÄ */} />
+          </Jumbotron>
+          <Jumbotron className="content">
+            <Forecasts id={this.state.cityFilter} />
+          </Jumbotron>
+        </Container>
       </div>
     );
   }

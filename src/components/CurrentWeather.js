@@ -5,6 +5,7 @@ class CurrentWeather extends React.Component {
     render() {
       const { weather } = this.props;
       if(weather) {
+        // TODO: Koko komponentti 
         return (
           <div>
             {weather.name}<br />
