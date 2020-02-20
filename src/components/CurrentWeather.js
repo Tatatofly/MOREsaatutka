@@ -1,22 +1,58 @@
 import React from 'react'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 class CurrentWeather extends React.Component {
     
     render() {
-      const { weather } = this.props;
+      const { weather } = this.props
+
+      // Ending for date
+      function getEndingForDate(day) {
+        let endings=["th","st","nd","rd"]
+        let x = day % 100
+        return day + (endings[(x-20)%10] || endings[x] || endings[0])
+     }
+
+     let theDay = getEndingForDate(new Date().toLocaleDateString('en-US', {day: 'numeric'}))
+
       if(weather) {
-        // TODO: Koko komponentti 
         return (
           <div>
-            {weather.name}<br />
-            {weather.weather[0].main}
+            <Row className="paddingBottom">
+              <Col>
+              <Row>
+                <Col>
+                  <span className="currentLocation">{weather.name}</span><br />
+                  <span className="currentWeather">{weather.weather[0].description.charAt(0).toUpperCase() + weather.weather[0].description.slice(1)}</span>
+                </Col>
+                <Col className="currentTemp">
+                <img src={"http://openweathermap.org/img/wn/" + weather.weather[0].icon + "@2x.png"} alt={weather.weather[0].icon} />
+                  {Math.round(weather.main.temp)}°C
+                </Col>
+              </Row> <br/>
+              <Row>
+                <Col className="currentDatetime">
+                  <span className="currentDay">{new Date().toLocaleDateString('en-US', {month: 'short'})} {theDay}</span><br />
+                  <span className="currentTime">{new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric"})}</span>
+                </Col>
+                <Col className="currentInfo">
+                  Wind: {Math.round(weather.wind.speed * 10) / 10} m/s<br />
+                  Humidity: {weather.main.humidity} %<br />
+                  Precipitation (3 h):  mm {/* TODO: Infot tähän */}
+                </Col>
+              </Row>
+              </Col>
+            </Row>
           </div>
         )
       }
       return (
-        <div>
-          <p>Loading...</p>
-        </div>
+        <div className="currentContent">
+        <Row>
+          <Col>Loading...</Col>
+        </Row>
+      </div>
       )
     }
   }

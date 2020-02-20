@@ -14,7 +14,7 @@ class App extends React.Component {
   state = {
     isLoading : false,
     isReady : false,
-    cityFilter : 0,
+    cityFilter : 655195,
     current : []
   }
 
@@ -43,9 +43,7 @@ class App extends React.Component {
           <Jumbotron className="content">
             <CurrentWeather weather={this.state.current[2] /* STAATTINEN VIELÄ */} />
           </Jumbotron>
-          <Jumbotron className="content">
-            <Forecasts id={this.state.cityFilter} />
-          </Jumbotron>
+          <Forecasts id={this.state.cityFilter} />
         </Container>
       </div>
     );

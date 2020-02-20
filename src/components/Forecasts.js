@@ -12,36 +12,20 @@ class Forecasts extends React.Component {
     
     componentDidMount() {
       const { id } = this.props
-      let ids = id
-      if(id === 0) { 
-        ids =  655195
-      }
-      getWeather.getForecast(ids).then(data =>
+      getWeather.getForecast(id).then(data =>
         this.setState({ forecasts : data.list})
       );
     }
       
       render() {
+        let fore = this.state.forecasts.slice(0, 5).map(i => {
+          return <Col key={i.dt} className="fiveMarginLR"><Forecast key={i.dt} forecast={i} /></Col>
+        })
+
         return (
-          <div className="forecasts">
-            <Row> {/* TODO: looppia tähän */}
-              <Col>
-                <Forecast forecast={this.state.forecasts[0]} />
-              </Col>
-              <Col>
-                <Forecast forecast={this.state.forecasts[1]} />
-              </Col>              
-              <Col>
-                <Forecast forecast={this.state.forecasts[2]} />
-              </Col>              
-              <Col>
-                <Forecast forecast={this.state.forecasts[3]} />
-              </Col>              
-              <Col>
-                <Forecast forecast={this.state.forecasts[4]} />
-              </Col>
-            </Row>
-          </div>
+          <Row className="noOverflow">
+            {fore}
+          </Row>
         )
       }
     }
