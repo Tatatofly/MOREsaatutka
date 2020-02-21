@@ -21,20 +21,20 @@ class CurrentWeather extends React.Component {
         // Tämä siksi koska Suomessa sataa myös lunta
         let rain = "0"
         if(weather.rain) {
-          rain = weather.rain["3h"];
+          rain = weather.rain["3h"]
         } else if(weather.snow) {
-          rain = weather.snow["3h"];
+          rain = weather.snow["3h"]
         }
         return (
           <div>
             <Row className="paddingBottom">
               <Col>
               <Row>
-                <Col>
+                <Col className="col-4">
                   <span className="currentLocation">{weather.name}</span><br />
                   <span className="currentWeather">{weather.weather[0].description.charAt(0).toUpperCase() + weather.weather[0].description.slice(1)}</span>
                 </Col>
-                <Col className="currentTemp">
+                <Col className="col-8 currentTemp">
                 <img src={"http://openweathermap.org/img/wn/" + weather.weather[0].icon + "@2x.png"} alt={weather.weather[0].icon} />
                   {Math.round(weather.main.temp)}°C
                 </Col>

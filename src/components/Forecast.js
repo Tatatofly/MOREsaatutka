@@ -1,18 +1,18 @@
 import React from 'react'
-import Jumbotron from 'react-bootstrap/Jumbotron';
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
 class Forecast extends React.Component {
     
     render() {
-      const { forecast } = this.props;
+      const { forecast } = this.props
       if(forecast) {
         // Sovellus näyttää sateen ja jos sadetta ei ole niin toissijaisesti lumen sademäärä
         // Tämä siksi koska Suomessa sataa myös lunta
         let rain = "0"
         if(forecast.rain) {
-          rain = forecast.rain["3h"];
+          rain = forecast.rain["3h"]
         } else if(forecast.snow) {
-          rain = forecast.snow["3h"];
+          rain = forecast.snow["3h"]
         }
         return (
           <div>

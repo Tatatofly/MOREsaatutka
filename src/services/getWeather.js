@@ -1,10 +1,10 @@
-import axios from 'axios';
-import apikey from '../apikey.json';
+import axios from 'axios'
+import apikey from '../apikey.json'
 
-const currentStart = "http://api.openweathermap.org/data/2.5/group?id=";
-const foreStart = "http://api.openweathermap.org/data/2.5/forecast?id=";
+const currentStart = "http://api.openweathermap.org/data/2.5/group?id="
+const foreStart = "http://api.openweathermap.org/data/2.5/forecast?id="
 
-const urlEnd = "&units=metric&appid=" + apikey.key;
+const urlEnd = "&units=metric&appid=" + apikey.key
 
 const getCurrent = async (cities) => {
   const url = await currentStart + cities.map(function(city) {return city}) + urlEnd;

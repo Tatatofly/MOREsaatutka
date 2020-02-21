@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
 
-import Container from 'react-bootstrap/Container';
-import Jumbotron from 'react-bootstrap/Jumbotron';
+import Container from 'react-bootstrap/Container'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
-import cities from './config/cities.json';
+import cities from './config/cities.json'
 import getWeather from './services/getWeather'
 import Forecasts from './components/Forecasts'
 import CurrentWeather from './components/CurrentWeather'
@@ -12,17 +12,13 @@ import CurrentWeather from './components/CurrentWeather'
 class App extends React.Component {
 
   state = {
-    isLoading : false,
-    isReady : false,
     current : []
   }
 
   componentDidMount() {
-    this.setState({isLoading: true});
     getWeather.getCurrent(Object.entries(cities).map(function(city) {return city[0]})).then(data =>
       this.setState({ current : data.list})
-    );
-    this.setState({isLoading: false, isReady: true});
+    )
   }
 
   render() {
@@ -62,4 +58,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App
