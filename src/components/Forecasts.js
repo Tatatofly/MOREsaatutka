@@ -18,12 +18,12 @@ class Forecasts extends React.Component {
     }
       
       render() {
-        let fore = this.state.forecasts.slice(0, 5).map(i => {
+        let fore = this.state.forecasts.slice(1, 6).map(i => {
           return <Col key={i.dt} className="fiveMarginLR"><Forecast key={i.dt} forecast={i} /></Col>
         })
 
         return (
-          <Row className="noOverflow">
+          <Row className="noOverflow bottom-margin-fifty">
             {fore}
           </Row>
         )

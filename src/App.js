@@ -14,11 +14,8 @@ class App extends React.Component {
   state = {
     isLoading : false,
     isReady : false,
-    cityFilter : 655195,
     current : []
   }
-
-  // TODO: Logiikka kaupunkien vaihdoille
 
   componentDidMount() {
     this.setState({isLoading: true});
@@ -29,21 +26,36 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    function changeCity(id) {
+      const cityElements = document.getElementsByClassName("cities")
+      const cityArray = Array.from(cityElements)
+      if(id === "0") {
+        cityArray.map(ce => ce.style.display = "inline")
+      } else {
+        const hideElements = cityArray.filter(ce => ce.id !== id)
+        const showElements = cityArray.filter(ce => ce.id === id)
+        hideElements.map(ce => ce.style.display = "none")
+        showElements.map(ce => ce.style.display = "inline")
+      }
+    }
+
     return (
       <div className="App">
         <div className="header">Säätutka</div>
         <Container>
           <div className="dropDown">
-            <select className="custom-select" value={this.state.cityFilter} onChange={(e) => this.setState({cityFilter: e.target.value})}>>
+            <select className="custom-select" value={this.state.cityFilter} onChange={(e) => changeCity(e.target.value)}>>
               <option value="0">Kaikki kaupungit</option>
               {Object.entries(cities).map((city) => <option key={city[0]} value={city[0]}>{city[1]}</option>)}
             </select>
           </div>
+          {Object.entries(cities).map((city,i) => 
+          <div key={city[0]} id={city[0]} className="cities">
           <Jumbotron className="content">
-            <CurrentWeather weather={this.state.current[2] /* STAATTINEN VIELÄ */} />
+            <CurrentWeather weather={this.state.current[i]} />
           </Jumbotron>
-          <Forecasts id={this.state.cityFilter} />
+          <Forecasts id={city[0]}/> 
+          </div>)}
         </Container>
       </div>
     );

@@ -7,6 +7,7 @@ class Forecast extends React.Component {
       const { forecast } = this.props;
       if(forecast) {
         // Sovellus näyttää sateen ja jos sadetta ei ole niin toissijaisesti lumen sademäärä
+        // Tämä siksi koska Suomessa sataa myös lunta
         let rain = "0"
         if(forecast.rain) {
           rain = forecast.rain["3h"];
@@ -21,7 +22,7 @@ class Forecast extends React.Component {
               <span className="forecastTemp">{Math.round(forecast.main.temp)}°C<br /></span>
             </Jumbotron>
             <Jumbotron className="singleForecast forecastFooter">
-                {Math.round(forecast.wind.speed * 10) / 10} m/s<br /> {/* TODO: Pyöristys kahden desimaalin tarkkuudella ja vika pois jos nolla */}
+                {forecast.wind.speed} m/s<br />
                 {Math.ceil(forecast.main.humidity/5)*5} %<br />
                 {Math.round(rain)} mm
             </Jumbotron>

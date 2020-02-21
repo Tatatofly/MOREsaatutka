@@ -17,6 +17,14 @@ class CurrentWeather extends React.Component {
      let theDay = getEndingForDate(new Date().toLocaleDateString('en-US', {day: 'numeric'}))
 
       if(weather) {
+        // Sovellus näyttää sateen ja jos sadetta ei ole niin toissijaisesti lumen sademäärä
+        // Tämä siksi koska Suomessa sataa myös lunta
+        let rain = "0"
+        if(weather.rain) {
+          rain = weather.rain["3h"];
+        } else if(weather.snow) {
+          rain = weather.snow["3h"];
+        }
         return (
           <div>
             <Row className="paddingBottom">
@@ -32,14 +40,14 @@ class CurrentWeather extends React.Component {
                 </Col>
               </Row> <br/>
               <Row>
-                <Col className="currentDatetime">
+                <Col className="col-3 currentDatetime">
                   <span className="currentDay">{new Date().toLocaleDateString('en-US', {month: 'short'})} {theDay}</span><br />
                   <span className="currentTime">{new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric"})}</span>
                 </Col>
-                <Col className="currentInfo">
+                <Col className="col-9 currentInfo">
                   Wind: {Math.round(weather.wind.speed * 10) / 10} m/s<br />
                   Humidity: {weather.main.humidity} %<br />
-                  Precipitation (3 h):  mm {/* TODO: Infot tähän */}
+                  Precipitation (3 h): {rain} mm
                 </Col>
               </Row>
               </Col>
